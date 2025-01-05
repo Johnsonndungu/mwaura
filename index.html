@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .dashboard {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgb(71, 68, 68);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #f8f0f0;
+        }
+
+        #logoutButton {
+            padding: 10px 20px;
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #logoutButton:hover {
+            background-color: #c0392b;
+        }
+
+        .item-list {
+            margin-top: 20px;
+        }
+
+        .item-list h2 {
+            margin-bottom: 10px;
+            color: #f7f2f2;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table th, table td {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .actions button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .actions button:hover {
+            background-color: #2980b9;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            width: 400px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-content h2 {
+            margin-top: 0;
+        }
+
+        .modal-content form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .modal-content form label {
+            font-weight: bold;
+        }
+
+        .modal-content form input, .modal-content form textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .modal-content form button {
+            padding: 10px;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .modal-content form button:hover {
+            background-color: #27ae60;
+        }
+
+        .close {
+            font-size: 20px;
+            color: #333;
+            float: right;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <header class="header">
+            <h1>Dashboard</h1>
+            <button id="logoutButton">Logout</button>
+        </header>
+
+        <main>
+            <section class="item-list">
+                <h2>Items</h2>
+                <table id="itemsTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Dynamic rows will be added here -->
+                    </tbody>
+                </table>
+
+                <div class="actions">
+                    <a href="/gemini/templates/add_item.html"><button id="addItemButton">Add Item</button></a>
+                    <button id="updateItemButton">Update Item</button>
+                    <button id="deleteItemButton">Delete Item</button>
+                    <button id="deleteAllItemsButton">Delete All Items</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Add Item Modal -->
+        </div>
+
+        <!-- Update Item Modal -->
+        <div id="updateItemModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeUpdateItemModal">&times;</span>
+                <h2>Update Item</h2>
+                <form id="updateItemForm">
+                    <label for="updateItemName">Name:</label>
+                    <input type="text" id="updateItemName" name="name" required>
+
+                    <label for="updateItemQuantity">Quantity:</label>
+                    <input type="number" id="updateItemQuantity" name="quantity" required>
+
+                    <label for="updateItemPrice">Price:</label>
+                    <input type="number" step="0.01" id="updateItemPrice" name="price" required>
+
+                    <button type="submit">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
